@@ -1,0 +1,189 @@
+{
+	"info": {
+		"_postman_id": "4e7df77b-7efa-484a-8b35-a79847b545ef",
+		"name": "companies",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "25913517"
+	},
+	"item": [
+		{
+			"name": "index",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{url}}/companies?sort[column]=id&sort[direction]=desc&with[]=branches:id,name",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"companies"
+					],
+					"query": [
+						{
+							"key": "sort[column]",
+							"value": "id"
+						},
+						{
+							"key": "sort[direction]",
+							"value": "desc"
+						},
+						{
+							"key": "with[]",
+							"value": "branches:id,name"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "store",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Ereen yeager\",\r\n    \"date\": \"1991-11-25\",\r\n    \"idfiscale\": \"CNKLK1434\",\r\n    \"cnss\": \"RFERM224\",\r\n    \"trade_registry\": \"UQMNX03\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/companies",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"companies"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "show",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/companies/1",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"companies",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Torphy-Raynor\",\r\n    \"capital\": null,\r\n    \"date\": \"1974-08-21\",\r\n    \"idfiscale\": \"DBCGP431\",\r\n    \"cnss\": \"ZOQFM321\",\r\n    \"trade_registry\": \"AXPAE214\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/companies/1",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"companies",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/companies/1",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"companies",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "datatable",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/companies/datatable",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"companies",
+						"datatable"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{token}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}

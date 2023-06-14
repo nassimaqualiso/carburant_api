@@ -1,0 +1,157 @@
+{
+	"info": {
+		"_postman_id": "27157bf8-b1da-4a5a-b7a4-b92372fa7946",
+		"name": "branches",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "25913517"
+	},
+	"item": [
+		{
+			"name": "index",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{url}}/branches",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"branches"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "store",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Ereen yeager\",\r\n    \"date\": \"1991-11-25\",\r\n    \"idfiscale\": \"CNKLK1434\",\r\n    \"cnss\": \"RFERM224\",\r\n    \"trade_registry\": \"UQMNX03\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/branches",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"branches"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "show",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/branches/1",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"branches",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Gleichner PLC\",\r\n    \"capital\": null,\r\n    \"date\": \"1977-07-15\",\r\n    \"idfiscale\": \"UWFJO443\",\r\n    \"cnss\": \"CHAOF241\",\r\n    \"trade_registry\": \"WSKYO040\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/branches/1",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"branches",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/branches/1",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"branches",
+						"1"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{token}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
