@@ -126,6 +126,10 @@ Route::middleware('auth:api')->group(
         Route::apiResource('customers', CustomerController::class);
 
         //Forfait
+        Route::post('forfaits/importExcelForfait', [ForfaitController::class, 'importExcelFile'])->name('forfait.import.excel');
+        Route::get('forfaits/exportExcelForfait', [ForfaitController::class, 'exportExcelFile'])->name('forfait.export.excel');
+        Route::post('forfaits/sendEmailForfait', [ForfaitController::class, 'sendEmail'])->name('forfait.send.email');
+
         Route::get('forfaits/get_list_nature', [ForfaitController::class, 'getListNature']);
         Route::get('forfaits/get_sub_nature', [ForfaitController::class, 'getListSubNature']);
         Route::get('forfaits/get_datacar_brands', [ForfaitController::class, 'getDataCarBrands']);

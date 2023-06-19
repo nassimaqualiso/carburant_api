@@ -16,6 +16,13 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 
+use Maatwebsite\Excel\Facades\Excel;
+use App\Imports\ImportForfait;
+use App\Exports\ExportForfait;
+use App\Jobs\SendForfaitMailJob;
+use App\Mail\ForfaitEmail;
+use Illuminate\Support\Facades\Storage;
+
 class ForfaitController extends Controller
 {
     use CrudTrait;
@@ -218,5 +225,46 @@ class ForfaitController extends Controller
             return sendResponse($forfait, 'forfait updated successfully');
         });
 
+    }
+
+    //---------------------------------------------------------------------------------------------->
+
+    public function importExcelFile(Request $request){
+        $this->validate($request, [
+            'upload_excel' => 'required|mimeTypes:'.
+                'application/vnd.ms-office,'.
+                'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,'.
+                'application/vnd.ms-excel',
+        ]);
+        $file = $request->file('upload_excel');
+        if($file){
+            Excel::import(new ImportForfait, $request->file('upload_excel')->store('Forfait-Excel'));
+            return response()->json(['message' => 'Excel file successfully imported'], 200);
+        }
+        return response()->json(['message' => 'Failed to import Excel file !'], 422);
+    }
+
+    public function exportExcelFile(){
+        return Excel::download(new ExportForfait, 'forfaits.xlsx');
+    }
+
+    public function sendEmail(Request $request){
+        $this->validate($request, [
+            'objet' => 'required|string|min:3',
+            'contenu' => 'required|string|min:3',
+            'destinataire' => 'required|email'
+        ]);
+
+        if($request->hasFile('piece_jointe')){
+            $file = $request->file('piece_jointe');
+            $nameFile = $file->getClientOriginalname();
+            $path = $file->storeAs('forfait_email', $nameFile);
+            $piece_jointe = $path;
+        }else{
+            $piece_jointe = null;
+        }
+        dispatch(new SendForfaitMailJob($request->destinataire, new ForfaitEmail($request->objet, $request->contenu, $piece_jointe)));
+        
+        return response()->json(['message' => "Email envoyé."], 201);
     }
 }
