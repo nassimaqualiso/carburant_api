@@ -34,12 +34,15 @@ class ForfaitEmail extends Mailable implements ShouldQueue
     public function build()
     {
         if(!is_null($this->piece_jointe)){
-            return $this->markdown('forfait-markdown')
+            $email = $this->markdown('forfait-markdown')
             ->subject($this->objet)
             ->with([    
                 'contenu' => $this->contenu,
-            ])
-            ->attach(storage_path('app/public').'/'.$this->piece_jointe); 
+            ]);
+            foreach ($this->piece_jointe as $filePath) {
+                $email->attach(storage_path('app/public').'/'.$filePath);
+            }
+            return $email;
         }else{
             return $this->markdown('forfait-markdown')
             ->subject($this->objet)
@@ -47,5 +50,20 @@ class ForfaitEmail extends Mailable implements ShouldQueue
                 'contenu' => $this->contenu,
             ]);
         }
+
+        // if(!is_null($this->piece_jointe)){
+        //     return $this->markdown('forfait-markdown')
+        //     ->subject($this->objet)
+        //     ->with([    
+        //         'contenu' => $this->contenu,
+        //     ])
+        //     ->attach(storage_path('app/public').'/'.$this->piece_jointe); 
+        // }else{
+        //     return $this->markdown('forfait-markdown')
+        //     ->subject($this->objet)
+        //     ->with([    
+        //         'contenu' => $this->contenu,
+        //     ]);
+        // }
     }
 }

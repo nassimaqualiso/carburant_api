@@ -255,11 +255,22 @@ class ForfaitController extends Controller
             'destinataire' => 'required|email'
         ]);
 
+        // if($request->hasFile('piece_jointe')){
+        //     $file = $request->file('piece_jointe');
+        //     $nameFile = $file->getClientOriginalname();
+        //     //$path = $file->storeAs('forfait_email', $nameFile);
+        //     $path = $file->store('forfait_email');
+        //     $piece_jointe = $path;
+        // }else{
+        //     $piece_jointe = null;
+        // }
+
         if($request->hasFile('piece_jointe')){
-            $file = $request->file('piece_jointe');
-            $nameFile = $file->getClientOriginalname();
-            $path = $file->storeAs('forfait_email', $nameFile);
-            $piece_jointe = $path;
+            $files = $request->piece_jointe;
+            foreach ($files as $file){
+                $path = $file->store('forfait_email');
+                $piece_jointe[] = $path;
+            }
         }else{
             $piece_jointe = null;
         }

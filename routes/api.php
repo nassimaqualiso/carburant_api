@@ -28,6 +28,7 @@ use App\Http\Controllers\VehicleModelController;
 use App\Http\Controllers\VehicleEnergyController;
 use App\Http\Controllers\VehicleLengthController;
 use App\Http\Controllers\VehiclePeriodController;
+use App\Http\Controllers\CalendarEventController;
 
 /*
 |--------------------------------------------------------------------------
@@ -124,6 +125,14 @@ Route::middleware('auth:api')->group(
         //Customers
         Route::get('customers/datatable', [CustomerController::class, 'datatable'])->name('customers.datatable');
         Route::apiResource('customers', CustomerController::class);
+
+        //CalendarEvent
+        Route::post('calendar_event/store', [CalendarEventController::class, 'store'])->name('calendar_event.store');
+        Route::get('calendar_event/getEvents', [CalendarEventController::class, 'index'])->name('calendar_event.getEvents');
+        Route::get('calendar_event/getEmployees', [CalendarEventController::class, 'getEmployees'])->name('calendar_event.getEmployees');
+        Route::post('calendar_event/{id}/updateEvent', [CalendarEventController::class, 'update'])->name('calendar_event.update');
+        Route::delete('calendar_event/{id}', [CalendarEventController::class, 'destroy'])->name('calendar_event.delete');
+        //Route::apiResource('calendar_event', CalendarEventController::class);
 
         //Forfait
         Route::post('forfaits/importExcelForfait', [ForfaitController::class, 'importExcelFile'])->name('forfait.import.excel');
